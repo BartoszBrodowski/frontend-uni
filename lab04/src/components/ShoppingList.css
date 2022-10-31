@@ -1,0 +1,7 @@
+.shopping-list {
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 40px;
+	list-style-type: none;
+	padding: 0;
+}
