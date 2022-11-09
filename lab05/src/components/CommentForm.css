@@ -1,0 +1,32 @@
+.error-message {
+	color: red;
+	padding: 0;
+	margin: 0;
+	/* position: absolute; */
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: 40px;
+}
+
+.form-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 40px;
+}
+
+.submit-button {
+	width: 100px;
+	margin: auto;
+}
+
+.form-input-container {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+	width: 20vw;
+}
