@@ -3,7 +3,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import './CommentForm.css';
 
-const CommentForm = () => {
+const CommentForm = ({ addComment }) => {
 	const [nameError, setNameError] = useState(false);
 	const [emailError, setEmailError] = useState(false);
 
@@ -39,7 +39,19 @@ const CommentForm = () => {
 			body: Yup.string().optional(),
 		}),
 		onSubmit: (values) => {
+			values['id'] = Math.floor(Math.random() * 10000);
+			values['userId'] = Math.floor(Math.random() * 10000);
 			console.log(values);
+			fetch('https://jsonplaceholder.typicode.com/comments', {
+				method: 'POST',
+				body: JSON.stringify(values),
+				headers: {
+					'Content-type': 'application/json; charset=UTF-8',
+				},
+			}).then((res) => {
+				formik.resetForm();
+				addComment(values);
+			});
 		},
 	});
 	return (

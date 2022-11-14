@@ -1,13 +1,13 @@
-import { useState } from 'react';
-const axios = require('axios');
-
-const CommentsList = () => {
-	const [commentsList, setCommentsList] = useState();
-	axios.get('https://jsonplaceholder.typicode.com/comments');
+const CommentsList = ({ commentsList }) => {
 	return (
 		<ul>
-			{commentsList.map((item, index) => {
-				return <li key={index}>{item.name}</li>;
+			{commentsList?.map((item, index) => {
+				return (
+					<li key={index}>
+						<div>Email:{item.email}</div>
+						<div>Name: {item.name}</div>
+					</li>
+				);
 			})}
 		</ul>
 	);
