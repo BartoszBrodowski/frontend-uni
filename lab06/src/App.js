@@ -1,25 +1,37 @@
-import logo from './logo.svg';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Collection from './components/Collection';
+import CollectionItem from './components/CollectionItem';
+import CollectionTypeItems from './components/CollectionTypeItems';
+import Home from './components/Home';
+import { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [collection, setCollection] = useState([
+		{ id: uuidv4(), name: 'Fender Stratocaster', type: 'Stratocaster', color: 'Cream-white' },
+		{ id: uuidv4(), name: 'Fender Telecaster', type: 'Telecaster', color: 'Red' },
+	]);
+	return (
+		<div className='App'>
+			<BrowserRouter>
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route
+						path='guitars'
+						element={
+							<Collection collection={collection} setCollection={setCollection} />
+						}
+					/>
+					<Route
+						path='/guitars/:type'
+						element={<CollectionTypeItems collection={collection} />}
+					/>
+					<Route path=':id' element={<CollectionItem collection={collection} />} />
+				</Routes>
+			</BrowserRouter>
+		</div>
+	);
 }
 
 export default App;
