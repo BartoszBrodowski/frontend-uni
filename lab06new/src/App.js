@@ -1,7 +1,8 @@
-import { BrowserRouter, Route, Routes, useParams, useLocation } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Collection from './components/Collection';
 import CollectionItem from './components/CollectionItem';
 import CollectionTypeItems from './components/CollectionTypeItems';
+import Home from './components/Home';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import './App.css';
@@ -15,15 +16,18 @@ function App() {
 		<div className='App'>
 			<BrowserRouter>
 				<Routes>
+					<Route path='/' element={<Home />} />
 					<Route
 						path='guitars'
 						element={
 							<Collection collection={collection} setCollection={setCollection} />
-						}>
-						<Route
-							path=':type'
-							element={<CollectionTypeItems collection={collection} />}></Route>
-					</Route>
+						}
+					/>
+					<Route
+						path='/guitars/:type'
+						element={<CollectionTypeItems collection={collection} />}
+					/>
+					<Route path=':id' element={<CollectionItem collection={collection} />} />
 				</Routes>
 			</BrowserRouter>
 		</div>

@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import './Collection.css';
 import { v4 as uuidv4 } from 'uuid';
+import { Link } from 'react-router-dom';
 
 const Collection = ({ collection, setCollection }) => {
 	const [name, setName] = useState('');
 	const [type, setType] = useState('');
 	const [color, setColor] = useState('');
+	const [search, setSearch] = useState('');
 
 	const setCollectionHandler = (e) => {
 		const newGuitar = {
@@ -27,6 +29,9 @@ const Collection = ({ collection, setCollection }) => {
 	const setColorHandler = (e) => {
 		setColor(e.target.value);
 	};
+	const setSearchHandler = (e) => {
+		setSearch(e.target.value);
+	};
 
 	const deleteItemHandler = (id) => {
 		const newCollection = collection.filter((el, itemIndex) => {
@@ -34,6 +39,8 @@ const Collection = ({ collection, setCollection }) => {
 		});
 		setCollection(newCollection);
 	};
+
+	const searchLink = `/guitars/${search}`;
 
 	return (
 		<div className='collection-container'>
@@ -61,6 +68,12 @@ const Collection = ({ collection, setCollection }) => {
 					<button type='button' onClick={setCollectionHandler}>
 						Add guitar
 					</button>
+				</div>
+			</div>
+			<div>
+				<input type='text' placeholder='Search by type' onChange={setSearchHandler} />
+				<div>
+					<Link to={searchLink}>Search</Link>
 				</div>
 			</div>
 		</div>

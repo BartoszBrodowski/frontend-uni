@@ -1,13 +1,22 @@
 import { useParams } from 'react-router-dom';
+import './CollectionTypeItems.css';
 
 const CollectionTypeItems = ({ collection }) => {
-	const { type } = useParams();
-	const filtered = collection.filter((el) => el.type == JSON.stringify(type));
+	const params = useParams();
+	const filteredCollection = collection.filter((el) => {
+		return el.type.toLowerCase() === params.type;
+	});
+	console.log(params.type);
 	return (
 		<div>
-			<ul>
-				{filtered.map((item, index) => {
-					return <li>{item.name}</li>;
+			<ul className='items-list'>
+				{filteredCollection.map((item, index) => {
+					return (
+						<li className='list-item' key={index}>
+							<div>{item.name}</div>
+							<div>{item.color}</div>
+						</li>
+					);
 				})}
 			</ul>
 		</div>
