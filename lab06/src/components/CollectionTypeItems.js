@@ -1,14 +1,13 @@
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import './CollectionTypeItems.css';
 
 const CollectionTypeItems = ({ collection }) => {
 	const params = useParams();
 	const filteredCollection = collection.filter((el) => {
-		return el.type.toLowerCase() === params.type;
+		return el.type.toLowerCase() === params.type.toLowerCase();
 	});
-	console.log(params.type);
 	return (
-		<div>
+		<div className='items-list-container'>
 			<ul className='items-list'>
 				{filteredCollection.map((item, index) => {
 					return (
@@ -19,6 +18,9 @@ const CollectionTypeItems = ({ collection }) => {
 					);
 				})}
 			</ul>
+			<div>
+				<Link to="/guitars">Go back to Collection</Link>
+			</div>
 		</div>
 	);
 };

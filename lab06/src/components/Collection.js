@@ -7,7 +7,8 @@ const Collection = ({ collection, setCollection }) => {
 	const [name, setName] = useState('');
 	const [type, setType] = useState('');
 	const [color, setColor] = useState('');
-	const [search, setSearch] = useState('');
+	const [searchType, setSearchType] = useState('');
+	const [searchId, setSearchId] = useState('');
 
 	const setCollectionHandler = (e) => {
 		const newGuitar = {
@@ -29,9 +30,12 @@ const Collection = ({ collection, setCollection }) => {
 	const setColorHandler = (e) => {
 		setColor(e.target.value);
 	};
-	const setSearchHandler = (e) => {
-		setSearch(e.target.value);
+	const setSearchTypeHandler = (e) => {
+		setSearchType(e.target.value);
 	};
+	const setSearchIdHandler = (e) => {
+		setSearchId(e.target.value)
+	}
 
 	const deleteItemHandler = (id) => {
 		const newCollection = collection.filter((el, itemIndex) => {
@@ -40,7 +44,8 @@ const Collection = ({ collection, setCollection }) => {
 		setCollection(newCollection);
 	};
 
-	const searchLink = `/guitars/${search}`;
+	const searchTypeLink = `/guitars/${searchType}`;
+	const searchIdLink = `/guitars/info/${searchId}`
 
 	return (
 		<div className='collection-container'>
@@ -71,9 +76,13 @@ const Collection = ({ collection, setCollection }) => {
 				</div>
 			</div>
 			<div>
-				<input type='text' placeholder='Search by type' onChange={setSearchHandler} />
+				<input type='text' placeholder='Search by type' onChange={setSearchTypeHandler} />
 				<div>
-					<Link to={searchLink}>Search</Link>
+					<Link to={searchTypeLink}>Search</Link>
+				</div>
+				<input type='text' placeholder='Search by id' onChange={setSearchIdHandler} />
+				<div>
+					<Link to={searchIdLink}>Search</Link>
 				</div>
 			</div>
 		</div>
