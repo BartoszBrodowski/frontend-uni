@@ -1,23 +1,33 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const GuitarsList = () => {
-	// const sortingFunctions = [
-	// 	{ name: 'A-Z', func: (a, b) => a.name.localeCompare(b.name) },
-	// 	{ name: 'Z-A', func: (a, b) => b.name.localeCompare(a.name) },
-	// 	{ name: 'Price: Low to High', func: (a, b) => a.price - b.price },
-	// 	{ name: 'Price: High to Low', func: (a, b) => b.price - a.price },
-	// ];
+	const navigate = useNavigate();
 	const guitarsList = useSelector((state) => state.guitarsList.value);
+
+	const showGuitarDetails = (id) => {
+		navigate('/details/' + id.toString());
+	};
+
 	return (
-		<div className='flex flex-col items-center'>
-			<ul>
+		<div className='border-t-2 border-orange-500 pt-4'>
+			<ul className='grid grid-cols-3 grid-rows-3'>
 				{guitarsList.map((guitar) => {
 					return (
-						<li key={guitar.id}>
+						<li
+							className='flex flex-col items-center hover:cursor-pointer'
+							key={guitar.id}
+							onClick={() => showGuitarDetails(guitar.id)}
+						>
+							<img
+								src={require('../../images/' + guitar.image)}
+								alt='Guitar'
+							/>
 							<div className='font-xl'>{guitar.name}</div>
-							<div>{guitar.type}</div>
-							<p className='text-grey'>{guitar.description}</p>
+							<p className='text-grey text-green-500'>
+								${guitar.price}
+							</p>
 						</li>
 					);
 				})}
