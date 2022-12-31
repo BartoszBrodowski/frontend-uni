@@ -1,7 +1,7 @@
 import Home from './pages/Home';
 import GuitarDetails from './pages/GuitarDetails';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Navbar from './components/Navbar';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 function App() {
 	return (
