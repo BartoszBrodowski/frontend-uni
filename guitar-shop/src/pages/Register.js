@@ -34,6 +34,7 @@ const Register = () => {
 			<Formik
 				initialValues={initialValues}
 				validationSchema={validationSchema}
+				validateOnChange={false}
 				onSubmit={onSubmit}
 				>
 				<Form className='flex flex-col items-center w-[500px]'>

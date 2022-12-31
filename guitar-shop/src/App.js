@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import { Route, Routes } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Login from './pages/Login';
 
 function App() {
 	const [showNavbar, setShowNavbar] = useState(false);
@@ -22,6 +23,7 @@ function App() {
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/register' element={<Register />} />
+					<Route path='/login' element={<Login />} />
 					<Route path='/details/:id' element={<GuitarDetails />} />
 				</Routes>
 		</div>
