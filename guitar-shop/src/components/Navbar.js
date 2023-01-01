@@ -12,7 +12,7 @@ const Navbar = () => {
 				type='text'
 				placeholder='Search'
 			/>
-			<div className='flex items-center gap-4 w-1/5 pl-48'>
+			<div className='flex flex-row-reverse gap-4 w-1/5 pr-4'>
 				<Link to='/shopping-cart'>
 					<AiOutlineShoppingCart className='text-white text-3xl hover:cursor-pointer' />
 				</Link>
