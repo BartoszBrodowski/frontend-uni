@@ -49,7 +49,7 @@ const Login = () => {
 					<div className='text-red-500'>
 						<ErrorMessage name='password' />
 					</div>
-					<button className='bg-orange-500 rounded text-white font-bold p-2 px-4 m-4 text-2xl' type='submit'>Log In</button>
+					<button className='login-register-button' type='submit'>Log In</button>
 				</Form>
 			</Formik>
 		</div>

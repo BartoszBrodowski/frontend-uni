@@ -17,7 +17,7 @@ const GuitarElement = ({ guitar, showGuitarDetails }) => {
 						${guitar.price}
 					</p>
 				</div>
-				<button className='bg-green-500 rounded p-1 text-white font-semibold' type='button' onClick={() => dispatch(addToCart(guitar))}>Add to Cart</button>
+				<button className='green-button' type='button' onClick={() => dispatch(addToCart(guitar))}>Add to Cart</button>
 			</div>
 	)
 }

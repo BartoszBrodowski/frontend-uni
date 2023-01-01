@@ -26,7 +26,7 @@ const Checkout = () => {
 					<div className="text-2xl font-semibold">${totalPrice}</div>
 				</div>
 			</div>
-			<button className='bg-orange-500 rounded p-2 text-white font-semibold' type='submit'>Checkout</button>
+			<button className='orange-button' type='submit'>Checkout</button>
 		</div>
 	)
 }

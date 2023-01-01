@@ -17,7 +17,7 @@ const ShoppingCartList = () => {
 				))}
 			</ul>
 			<Link to='/'>
-				<button className="bg-orange-500 text-white font-semibold text-xl p-2 rounded flex items-center"><AiOutlineArrowLeft /><div>Continue Shopping</div></button>
+				<button className="orange-button p-2 flex items-center"><AiOutlineArrowLeft /><div>Continue Shopping</div></button>
 			</Link>
 		</div>
 	)

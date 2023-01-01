@@ -18,7 +18,7 @@ const ShoppingCartItem = ({ keyId, guitar }) => {
 				<p>{guitar.color}</p>
 			</div>
 			<div className='flex justify-center'>
-				<button className='bg-red-500 text-white p-1 font-semibold rounded' onClick={() => dispatch(removeFromCart(keyId))}>Remove from Cart</button>
+				<button className='duration-200 bg-red-500 text-white p-1 font-semibold rounded hover:bg-red-700' onClick={() => dispatch(removeFromCart(keyId))}>Remove from Cart</button>
 			</div>
 		</div>
 	)

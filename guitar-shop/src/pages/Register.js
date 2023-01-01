@@ -1,6 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
 	const navigate = useNavigate();
@@ -88,7 +88,10 @@ const Register = () => {
 						name='confirmPassword'
 						placeholder='Confirm your password'
 					/>
-					<button className='bg-orange-500 rounded text-white font-bold p-2 px-4 m-4 text-2xl' type='submit'>Submit</button>
+					<Link to='/login'>
+						<div className='duration-200 text-orange-500 hover:cursor-pointer hover:text-white rounded p-1 hover:bg-orange-500'>Already have an account? Log in</div>
+					</Link>
+					<button className='login-register-button' type='submit'>Submit</button>
 				</Form>
 			</Formik>
 		</div>
