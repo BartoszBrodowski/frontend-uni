@@ -1,11 +1,12 @@
+import { Route, Routes } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 import Home from './pages/Home';
 import GuitarDetails from './pages/GuitarDetails';
 import Navbar from './components/Navbar';
 import Register from './pages/Register';
-import { Route, Routes } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 import Login from './pages/Login';
+import ShoppingCart from './pages/ShoppingCart';
 
 function App() {
 	const [showNavbar, setShowNavbar] = useState(false);
@@ -25,6 +26,7 @@ function App() {
 					<Route path='/register' element={<Register />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/details/:id' element={<GuitarDetails />} />
+					<Route path='/shopping-cart' element={<ShoppingCart />} />
 				</Routes>
 		</div>
 	);

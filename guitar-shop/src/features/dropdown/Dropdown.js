@@ -4,7 +4,7 @@ import {
 	sortZtoA,
 	sortPriceHighToLow,
 	sortPriceLowToHigh,
-} from '../guitarsList/guitarsSlice';
+} from '../guitarsList/guitarsListSlice';
 import { changeSort } from '../sortSearch/searchSortSlice';
 import { showDropdown } from './dropdownSlice';
 

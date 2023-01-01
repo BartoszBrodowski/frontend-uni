@@ -1,7 +1,9 @@
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { useParams } from "react-router-dom"
+import { addToCart } from "../features/shoppingCart/shoppingCartSlice"
 
 const GuitarDetails = () => {
+	const dispatch = useDispatch()
 	const guitarsList = useSelector((state) => state.guitarsList.value)
 	const { id } = useParams();
 	const guitar = guitarsList.find((guitar) => guitar.id === id)
@@ -14,7 +16,7 @@ const GuitarDetails = () => {
 					<div className="flex justify-center items-center border-l-2 border-r-2 border-orange-500 h-full">{guitar.description}</div>
 					<div className="flex flex-col items-center justify-center p-4 h-full">
 						<div className="text-green-700 font-bold text-2xl">Price: {guitar.price}</div>
-						<button className="text-white bg-green-700 font-bold text-4xl p-2 rounded">Add to cart</button>
+						<button className="text-white bg-green-700 font-bold text-4xl p-2 rounded" onClick={() => dispatch(addToCart(guitar))}>Add to cart</button>
 					</div>
 				</div>
 			</div>
