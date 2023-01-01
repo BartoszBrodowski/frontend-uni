@@ -5,7 +5,7 @@ const Checkout = () => {
 	const totalPrice = shoppingCartList.reduce((acc, item) => acc + item.price, 0)
 	const itemsAmount = shoppingCartList.length
 	return (
-		<div className='flex flex-col items-center justify-between shadow-card p-4 pt-2 h-2/5'>
+		<div className='flex flex-col items-center justify-between shadow-card p-4 pt-2 h-[300px]'>
 			<div className='flex flex-col justify-between w-full h-full'>
 				<div>
 					<div className='flex justify-between'>
