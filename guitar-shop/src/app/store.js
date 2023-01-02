@@ -3,7 +3,7 @@ import guitarsListReducer from '../features/guitarsList/guitarsListSlice';
 import sortSearchReducer from '../features/sortSearch/searchSortSlice';
 import dropdownReducer from '../features/dropdown/dropdownSlice';
 import shoppingCartReducer from '../features/shoppingCart/shoppingCartSlice';
-import userStatusReducer from '../features/userProfile/userStatusSlice';
+import userInfoReducer from '../features/userInfo/userInfoSlice';
 
 export const store = configureStore({
 	reducer: {
@@ -11,6 +11,6 @@ export const store = configureStore({
 		sortSearch: sortSearchReducer,
 		dropdown: dropdownReducer,
 		shoppingCart: shoppingCartReducer,
-		userStatus: userStatusReducer,
+		userInfo: userInfoReducer,
 	},
 });

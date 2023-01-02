@@ -3,11 +3,12 @@ import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { userLogin } from '../features/userProfile/userStatusSlice';
+import axios, * as others from 'axios';
+import { setCredentials } from '../features/userInfo/userInfoSlice';
 
 const Login = () => {
-	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const initialValues = {
 		email: '',
 		password: '',
@@ -18,11 +19,18 @@ const Login = () => {
 		password: Yup.string().required('Provide a password'),
 	});
 
-	const onSubmit = (values, {resetForm}) => {
-		console.log('Form data', values);
-		resetForm();
-		dispatch(userLogin())
-		navigate('/');
+	const onSubmit = async (values, {resetForm}) => {
+		try {
+			console.log(values.email, values.password)
+			await axios.post('http://localhost:8000/login', { email: values.email, password: values.password })
+			const { data } = await axios.get(`http://localhost:8000/login/${values.email}`)
+			console.log(data)
+			dispatch(setCredentials({ username: data[0].username, firstName: data[0].firstName, lastName: data[0].lastName, email: data[0].email, isLoggedIn: data[0].isLoggedIn, wishlist: data[0].wishlist }))
+			navigate('/')
+			resetForm();
+		} catch (error) {
+			console.log(error);
+		}
 	};
 	return (
 		<div className='flex flex-col justify-center items-center w-screen h-screen'>
@@ -34,6 +42,9 @@ const Login = () => {
 				onSubmit={onSubmit}
 			>
 				<Form className='flex flex-col items-center w-[500px]'>
+					<div className='text-red-500'>
+						<ErrorMessage name='email' />
+					</div>
 					<Field
 						className='border-2 border-orange-500 rounded p-2 mb-4 outline-none'
 						type='email'
@@ -42,7 +53,7 @@ const Login = () => {
 						placeholder='Enter your email'
 					/>
 					<div className='text-red-500'>
-						<ErrorMessage name='email' />
+						<ErrorMessage name='password' />
 					</div>
 					<Field
 						className='border-2 border-orange-500 rounded p-2 mb-4 outline-none'
@@ -51,9 +62,6 @@ const Login = () => {
 						name='password'
 						placeholder='Enter your password'
 					/>
-					<div className='text-red-500'>
-						<ErrorMessage name='password' />
-					</div>
 					<Link to='/register'>
 						<div className='duration-200 text-orange-500 hover:cursor-pointer hover:text-white rounded p-1 hover:bg-orange-500'>Don't have an account? Register now.</div>
 					</Link>

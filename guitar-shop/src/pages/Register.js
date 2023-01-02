@@ -1,10 +1,13 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import axios, * as others from 'axios';
 
 const Register = () => {
 	const navigate = useNavigate();
 	const initialValues = {
+		username: '',
 		firstName: '',
 		lastName: '',
 		email: '',
@@ -13,6 +16,7 @@ const Register = () => {
 	};
 
 	const validationSchema = Yup.object({
+		username: Yup.string().required('Required'),
 		firstName: Yup.string().required('Required'),
 		lastName: Yup.string().required('Required'),
 		email: Yup.string().email('Invalid email format').required('Required'),
@@ -22,10 +26,14 @@ const Register = () => {
 			.required('Required'),
 	});
 
-	const onSubmit = (values, {resetForm}) => {
-		console.log('Form data', values);
-		resetForm();
-		navigate('/login');
+	const onSubmit = async (values, {resetForm}) => {
+		try {
+			await axios.post('http://localhost:8000/register', { username: values.username, firstName: values.firstName, lastName: values.lastName, email: values.email, password: values.password})
+			navigate('/login');
+			resetForm();
+		} catch (error) {
+			console.log(error);
+		}
 	};
 
 	return (
@@ -39,7 +47,18 @@ const Register = () => {
 				>
 				<Form className='flex flex-col items-center w-[500px]'>
 					<div className='text-red-500'>
-						<ErrorMessage name='firstName' />
+						<ErrorMessage name='username' />
+					</div>
+					<Field
+						className='border-2 border-orange-500 rounded p-2 mb-4 outline-none'
+						type='text'
+						id='username'
+						name='username'
+						placeholder='Enter your username'
+					/>
+					
+					<div className='text-red-500'>
+						<ErrorMessage name='username' />
 					</div>
 					<Field
 						className='border-2 border-orange-500 rounded p-2 mb-4 outline-none'
