@@ -1,8 +1,14 @@
 import { useDispatch } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import { addToCart } from "../shoppingCart/shoppingCartSlice"
+import { addToWishlist } from "../userInfo/userInfoSlice"
 
-const GuitarElement = ({ guitar, showGuitarDetails }) => {
-	const dispatch = useDispatch()
+const GuitarElement = ({ guitar }) => {
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const showGuitarDetails = (id) => {
+		navigate('/details/' + id.toString());
+	};
 	return (
 			<div
 				className='flex flex-col items-center hover:cursor-pointer'

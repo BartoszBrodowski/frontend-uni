@@ -6,7 +6,6 @@ const initialState = {
 		firstName: "",
 		lastName: "",
 		email: "",
-		password: "",
 		wishlist: [],
 		loggedIn: false,
 	}
@@ -21,15 +20,14 @@ export const userInfoSlice = createSlice({
 			state.user.firstName = action.payload.firstName;
 			state.user.lastName = action.payload.lastName;
 			state.user.email = action.payload.email;
-			state.user.password = action.payload.password;
 			state.user.loggedIn = true;
 			state.user.wishlist = action.payload.wishlist;
 		},
 		addToWishlist: (state, action) => {
-			state.wishlist.push(action.payload);
+			state.user.wishlist.push(action.payload);
 		},
 		removeFromWishlist: (state, action) => {
-			state.wishlist = state.wishlist.filter((item) => item.id !== action.payload.id);
+			state.user.wishlist = state.user.wishlist.map((guitar) => guitar).filter((guitar, index) => index !== action.payload);
 		},
 	},
 });

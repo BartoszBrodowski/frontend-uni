@@ -21,10 +21,8 @@ const Login = () => {
 
 	const onSubmit = async (values, {resetForm}) => {
 		try {
-			console.log(values.email, values.password)
 			await axios.post('http://localhost:8000/login', { email: values.email, password: values.password })
 			const { data } = await axios.get(`http://localhost:8000/login/${values.email}`)
-			console.log(data)
 			dispatch(setCredentials({ username: data[0].username, firstName: data[0].firstName, lastName: data[0].lastName, email: data[0].email, isLoggedIn: data[0].isLoggedIn, wishlist: data[0].wishlist }))
 			navigate('/')
 			resetForm();
