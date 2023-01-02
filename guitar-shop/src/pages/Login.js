@@ -1,9 +1,13 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { userLogin } from '../features/userProfile/userStatusSlice';
 
 const Login = () => {
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
 	const initialValues = {
 		email: '',
 		password: '',
@@ -17,6 +21,7 @@ const Login = () => {
 	const onSubmit = (values, {resetForm}) => {
 		console.log('Form data', values);
 		resetForm();
+		dispatch(userLogin())
 		navigate('/');
 	};
 	return (
@@ -49,6 +54,9 @@ const Login = () => {
 					<div className='text-red-500'>
 						<ErrorMessage name='password' />
 					</div>
+					<Link to='/register'>
+						<div className='duration-200 text-orange-500 hover:cursor-pointer hover:text-white rounded p-1 hover:bg-orange-500'>Don't have an account? Register now.</div>
+					</Link>
 					<button className='login-register-button' type='submit'>Log In</button>
 				</Form>
 			</Formik>
