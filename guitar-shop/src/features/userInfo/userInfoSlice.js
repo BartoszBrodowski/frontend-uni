@@ -8,6 +8,13 @@ const initialState = {
 		email: "",
 		wishlist: [],
 		loggedIn: false,
+		shippingAddress: {
+			city: '',
+			street: '',
+			buildingFlat: '',
+			postalCode: '',
+			phoneNumber: '',
+		}
 	}
 };
 
@@ -29,9 +36,12 @@ export const userInfoSlice = createSlice({
 		removeFromWishlist: (state, action) => {
 			state.user.wishlist = state.user.wishlist.map((guitar) => guitar).filter((guitar, index) => index !== action.payload);
 		},
+		setShippingAddress: (state, action) => {
+			state.user.shippingAddress = action.payload;
+		},
 	},
 });
 
-export const { setCredentials, addToWishlist, removeFromWishlist } = userInfoSlice.actions;
+export const { setCredentials, addToWishlist, removeFromWishlist, setShippingAddress } = userInfoSlice.actions;
 
 export default userInfoSlice.reducer;

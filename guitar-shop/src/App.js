@@ -8,12 +8,13 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import ShoppingCart from './pages/ShoppingCart';
 import UserProfile from './pages/UserProfile';
+import AddressEdit from './pages/AddressEdit';
 
 function App() {
 	const [showNavbar, setShowNavbar] = useState(false);
 	const location = useLocation();
 	useEffect(() => {
-		if (location.pathname === '/register' || location.pathname === '/login') {
+		if (location.pathname === '/register' || location.pathname === '/login' || location.pathname == '/user-profile/:username/address') {
 			setShowNavbar(false);
 		} else {
 			setShowNavbar(true);
@@ -29,6 +30,7 @@ function App() {
 					<Route path='/details/:id' element={<GuitarDetails />} />
 					<Route path='/shopping-cart' element={<ShoppingCart />} />
 					<Route path='/user-profile/:username' element={<UserProfile />}/>
+					<Route path='/user-profile/:username/address' element={<AddressEdit />}/>
 				</Routes>
 		</div>
 	);

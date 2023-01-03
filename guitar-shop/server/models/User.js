@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	shippingAddress: {
+		type: Object,
+		required: false,
+	},
 	wishlist: {
 		type: Array,
 		default: [],

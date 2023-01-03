@@ -38,6 +38,7 @@ const register = async (req, res) => {
 			email,
 			isLoggedIn: false,
 			password: hashedPassword,
+			shippingAddress: {},
 			wishlist: [],
 		});
 		await user.save();
@@ -58,7 +59,7 @@ const login = async (req, res) => {
 		if (!isPasswordCorrect) {
 			return res.status(400).json({ message: 'Invalid credentials' });
 		}
-		user = await user.updateOne({ isLoggedIn: true });
+		await user.updateOne({ isLoggedIn: true });
 		res.status(200).json({ msg: 'Logged in' });
 	} catch (error) {
 		res.status(500).json({ error });
@@ -80,11 +81,21 @@ const logout = async (req, res) => {
 	}
 };
 
-app.post('/register', register);
-app.post('/login', login);
-app.post('/logout', logout);
+const addShippingAddress = async (req, res) => {
+	try {
+		const { email, shippingAddress } = req.body;
+		let user = await User.findOne({ email });
+		if (!user) {
+			return res.status(404).json({ message: 'User does not exist' });
+		}
+		user = await user.updateOne({ shippingAddress: shippingAddress });
+		res.status(200).json({ msg: 'Shipping address added' });
+	} catch (error) {
+		res.status(500).json({ error });
+	}
+};
 
-app.get('/login/:email', async (req, res) => {
+const getLogin = async (req, res) => {
 	try {
 		const { email } = req.params;
 		const user = await User.find({ email });
@@ -92,7 +103,29 @@ app.get('/login/:email', async (req, res) => {
 	} catch (error) {
 		res.status(404).json({ message: error.message });
 	}
-})
+}
+
+const getShippingAddress = async (req, res) => {
+	try {
+		const { email } = req.params;
+		const user = await User.find({ email
+		});
+		res.status(200).json(user.shippingAddress);
+	} catch (error) {
+		res.status(404).json({ message: error.message });
+	}
+};
+
+app.post('/register', register);
+app.post('/login', login);
+app.post('/logout', logout);
+app.post('/addShippingAddress', addShippingAddress);
+
+app.get('/login/:email', getLogin)
+app.get('/getShippingAddress/:email', getShippingAddress);
+
+
+
 
 app.listen(8000, () => {
 	console.log('listening on port 8000');
