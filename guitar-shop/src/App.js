@@ -25,6 +25,8 @@ function App() {
 				{showNavbar && <Navbar />}
 				<Routes >
 					<Route path='/' element={<Home />} />
+					<Route path='/guitars' element={<Home />} />
+					<Route path='/guitars/:category' element={<Home />} />
 					<Route path='/register' element={<Register />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/details/:id' element={<GuitarDetails />} />

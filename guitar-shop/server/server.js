@@ -5,6 +5,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const User = require('./models/User.js');
+const Guitar = require('./models/Guitar.js');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 
@@ -26,6 +27,9 @@ async function run() {
 
 // Run the function to connect to database
 run();
+
+
+// POST REQUEST FUNCTIONS
 
 const register = async (req, res) => {
 	try {
@@ -95,6 +99,27 @@ const addShippingAddress = async (req, res) => {
 	}
 };
 
+const addGuitar = async (req, res) => {
+	try {
+		const { name, type, color, description, price, image } = req.body;
+		const guitar = new Guitar({
+			name,
+			type,
+			color,
+			description,
+			price,
+			image,
+		});
+		await guitar.save();
+		res.status(201).json({ guitar: guitar._id });
+	} catch (error) {
+		res.status(400).json({ error });
+	}
+};
+
+
+// GET REQUEST FUNCTIONS
+
 const getLogin = async (req, res) => {
 	try {
 		const { email } = req.params;
@@ -116,14 +141,26 @@ const getShippingAddress = async (req, res) => {
 	}
 };
 
+const getGuitarList = async (req, res) => {
+	try {
+		const guitars = await Guitar.find();
+		console.log(guitars)
+		res.status(200).json(guitars);
+	} catch (error) {
+		res.status(404).json({ message: error.message });
+	}
+}
+		
+
 app.post('/register', register);
 app.post('/login', login);
 app.post('/logout', logout);
 app.post('/addShippingAddress', addShippingAddress);
+app.post('/addGuitar', addGuitar)
 
 app.get('/login/:email', getLogin)
 app.get('/getShippingAddress/:email', getShippingAddress);
-
+app.get('/guitars', getGuitarList)
 
 
 

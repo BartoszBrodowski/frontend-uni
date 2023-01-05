@@ -1,9 +1,10 @@
-import Dropdown from '../../features/dropdown/Dropdown';
+import Dropdown from '../../features/sortDropdown/Dropdown';
 import { useSelector, useDispatch } from 'react-redux';
-import { showDropdown } from '../../features/dropdown/dropdownSlice';
+import { showDropdown } from '../../features/sortDropdown/dropdownSlice';
 
 const Filters = () => {
 	const currentSearchSort = useSelector((state) => state.sortSearch.value);
+	const currentSearchType = useSelector((state) => state.sortSearch.type);
 	const displayDropdown = useSelector((state) => state.dropdown.value);
 	const dispatch = useDispatch();
 	const dropdownOpenHanlder = () => {
@@ -22,6 +23,14 @@ const Filters = () => {
 					</h1>
 				</div>
 				{displayDropdown && <Dropdown />}
+			</form>
+			<form className='w-60'>
+				<div className='flex items-center border-orange-500 border h-10 z-10 px-2'>
+					<h1>Type: </h1>
+					<span className='text-slate-400 ml-2'>
+						{currentSearchType}
+					</span>
+				</div>
 			</form>
 		</div>
 	);
