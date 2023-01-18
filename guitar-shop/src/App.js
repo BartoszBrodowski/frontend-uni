@@ -9,31 +9,47 @@ import Login from './pages/Login';
 import ShoppingCart from './pages/ShoppingCart';
 import UserProfile from './pages/UserProfile';
 import AddressEdit from './pages/AddressEdit';
+import { useSelector } from 'react-redux';
 
 function App() {
 	const [showNavbar, setShowNavbar] = useState(false);
+	const { loggedIn } = useSelector((state) => state.userInfo.user);
 	const location = useLocation();
 	useEffect(() => {
-		if (location.pathname === '/register' || location.pathname === '/login' || location.pathname == '/user-profile/:username/address') {
+		if (
+			location.pathname === '/register' ||
+			location.pathname === '/login' ||
+			location.pathname == '/user-profile/:username/address'
+		) {
 			setShowNavbar(false);
 		} else {
 			setShowNavbar(true);
 		}
-	}, [location])
+	}, [location]);
 	return (
 		<div>
-				{showNavbar && <Navbar />}
-				<Routes >
+			{showNavbar && <Navbar />}
+			{loggedIn ? (
+				<Routes>
 					<Route path='/' element={<Home />} />
-					<Route path='/guitars' element={<Home />} />
-					<Route path='/guitars/:category' element={<Home />} />
 					<Route path='/register' element={<Register />} />
 					<Route path='/login' element={<Login />} />
 					<Route path='/details/:id' element={<GuitarDetails />} />
 					<Route path='/shopping-cart' element={<ShoppingCart />} />
-					<Route path='/user-profile/:username' element={<UserProfile />}/>
-					<Route path='/user-profile/:username/address' element={<AddressEdit />}/>
+					<Route path='/user-profile/:username' element={<UserProfile />} />
+					<Route path='/user-profile/:username/address' element={<AddressEdit />} />
 				</Routes>
+			) : (
+				<Routes>
+					<Route path='/' element={<Home />} />
+					<Route path='/register' element={<Register />} />
+					<Route path='/login' element={<Login />} />
+					<Route path='/details/:id' element={<GuitarDetails />} />
+					<Route path='/shopping-cart' element={<Login />} />
+					<Route path='/user-profile/:username' element={<Login />} />
+					<Route path='/user-profile/:username/address' element={<Login />} />
+				</Routes>
+			)}
 		</div>
 	);
 }

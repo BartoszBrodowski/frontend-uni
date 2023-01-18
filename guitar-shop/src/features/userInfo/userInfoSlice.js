@@ -1,11 +1,11 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	user: {
-		username: "",
-		firstName: "",
-		lastName: "",
-		email: "",
+		username: '',
+		firstName: '',
+		lastName: '',
+		email: '',
 		wishlist: [],
 		loggedIn: false,
 		shippingAddress: {
@@ -14,13 +14,13 @@ const initialState = {
 			buildingFlat: '',
 			postalCode: '',
 			phoneNumber: '',
-		}
-	}
+		},
+	},
 };
 
 export const userInfoSlice = createSlice({
-	name: "userInfo",
-	initialState,	
+	name: 'userInfo',
+	initialState,
 	reducers: {
 		setCredentials: (state, action) => {
 			state.user.username = action.payload.username;
@@ -34,14 +34,32 @@ export const userInfoSlice = createSlice({
 			state.user.wishlist.push(action.payload);
 		},
 		removeFromWishlist: (state, action) => {
-			state.user.wishlist = state.user.wishlist.map((guitar) => guitar).filter((guitar, index) => index !== action.payload);
+			state.user.wishlist = state.user.wishlist
+				.map((guitar) => guitar)
+				.filter((guitar, index) => index !== action.payload);
 		},
 		setShippingAddress: (state, action) => {
 			state.user.shippingAddress = action.payload;
 		},
+		userLogout: (state) => {
+			state.user.username = '';
+			state.user.firstName = '';
+			state.user.lastName = '';
+			state.user.email = '';
+			state.user.loggedIn = false;
+			state.user.wishlist = [];
+			state.user.shippingAddress = {
+				city: '',
+				street: '',
+				buildingFlat: '',
+				postalCode: '',
+				phoneNumber: '',
+			};
+		},
 	},
 });
 
-export const { setCredentials, addToWishlist, removeFromWishlist, setShippingAddress } = userInfoSlice.actions;
+export const { setCredentials, addToWishlist, removeFromWishlist, setShippingAddress, userLogout } =
+	userInfoSlice.actions;
 
 export default userInfoSlice.reducer;

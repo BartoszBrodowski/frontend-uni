@@ -11,9 +11,9 @@ const cors = require('cors');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:3000' }));
 
-const uri = `mongodb+srv://admin:${process.env.MONGO_PASSWORD}@cluster0.smsb3gz.mongodb.net/?retryWrites=true&w=majority`;
+const uri = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@pwasil.pl:27017/bartek`;
 
 // Connect to database
 async function run() {
@@ -27,7 +27,6 @@ async function run() {
 
 // Run the function to connect to database
 run();
-
 
 // POST REQUEST FUNCTIONS
 
@@ -78,14 +77,14 @@ const logout = async (req, res) => {
 			return res.status(404).json({ message: 'User does not exist' });
 		}
 		user = await user.updateOne({ isLoggedIn: false });
-		user.save()
+		user.save();
 		res.status(200).json({ msg: 'Logged out' });
 	} catch (error) {
 		res.status(500).json({ error });
 	}
 };
 
-const addShippingAddress = async (req, res) => {
+const editShippingAddress = async (req, res) => {
 	try {
 		const { email, shippingAddress } = req.body;
 		let user = await User.findOne({ email });
@@ -117,7 +116,6 @@ const addGuitar = async (req, res) => {
 	}
 };
 
-
 // GET REQUEST FUNCTIONS
 
 const getLogin = async (req, res) => {
@@ -128,13 +126,12 @@ const getLogin = async (req, res) => {
 	} catch (error) {
 		res.status(404).json({ message: error.message });
 	}
-}
+};
 
 const getShippingAddress = async (req, res) => {
 	try {
 		const { email } = req.params;
-		const user = await User.find({ email
-		});
+		const user = await User.find({ email });
 		res.status(200).json(user.shippingAddress);
 	} catch (error) {
 		res.status(404).json({ message: error.message });
@@ -144,25 +141,39 @@ const getShippingAddress = async (req, res) => {
 const getGuitarList = async (req, res) => {
 	try {
 		const guitars = await Guitar.find();
-		console.log(guitars)
+		console.log(guitars);
 		res.status(200).json(guitars);
 	} catch (error) {
 		res.status(404).json({ message: error.message });
 	}
-}
-		
+};
+
+const deleteShippingAddress = async (req, res) => {
+	try {
+		const { username } = req.params;
+		let user = await User.findOne({ username });
+		if (!user) {
+			return res.status(404).json({ message: 'User does not exist' });
+		}
+		user = await user.updateOne({ shippingAddress: {} });
+		res.status(200).json({ msg: 'Shipping address deleted' });
+	} catch (error) {
+		res.status(500).json({ error });
+	}
+};
 
 app.post('/register', register);
 app.post('/login', login);
 app.post('/logout', logout);
-app.post('/addShippingAddress', addShippingAddress);
-app.post('/addGuitar', addGuitar)
+app.post('/addGuitar', addGuitar);
 
-app.get('/login/:email', getLogin)
+app.get('/login/:email', getLogin);
 app.get('/getShippingAddress/:email', getShippingAddress);
-app.get('/guitars', getGuitarList)
+app.get('/guitars', getGuitarList);
 
+app.put('/changeShippingAddress', editShippingAddress);
 
+app.delete('/deleteAddress/:username', deleteShippingAddress);
 
 app.listen(8000, () => {
 	console.log('listening on port 8000');

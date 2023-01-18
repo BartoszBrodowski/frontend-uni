@@ -2,7 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
 	value: 'A-Z',
-	type: 'All',
+	onlyAcoustic: false,
+	sortDate: 'ASC',
 };
 
 export const searchSortSlice = createSlice({
@@ -12,11 +13,11 @@ export const searchSortSlice = createSlice({
 		changeSort: (state, action) => {
 			state.value = action.payload;
 		},
-		changeType: (state, action) => {
-			state.type = action.payload;
+		changeCategory: (state, action) => {
+			state.category = action.payload;
 		},
 	},
 });
-export const { changeSort, changeType } = searchSortSlice.actions;
+export const { changeSort, changeCategory } = searchSortSlice.actions;
 
 export default searchSortSlice.reducer;

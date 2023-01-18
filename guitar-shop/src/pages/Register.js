@@ -26,9 +26,15 @@ const Register = () => {
 			.required('Required'),
 	});
 
-	const onSubmit = async (values, {resetForm}) => {
+	const onSubmit = async (values, { resetForm }) => {
 		try {
-			await axios.post('http://localhost:8000/register', { username: values.username, firstName: values.firstName, lastName: values.lastName, email: values.email, password: values.password})
+			await axios.post('http://localhost:8000/register', {
+				username: values.username,
+				firstName: values.firstName,
+				lastName: values.lastName,
+				email: values.email,
+				password: values.password,
+			});
 			navigate('/login');
 			resetForm();
 		} catch (error) {
@@ -43,8 +49,7 @@ const Register = () => {
 				initialValues={initialValues}
 				validationSchema={validationSchema}
 				validateOnChange={false}
-				onSubmit={onSubmit}
-				>
+				onSubmit={onSubmit}>
 				<Form className='flex flex-col items-center w-[500px]'>
 					<div className='text-red-500'>
 						<ErrorMessage name='username' />
@@ -56,9 +61,9 @@ const Register = () => {
 						name='username'
 						placeholder='Enter your username'
 					/>
-					
+
 					<div className='text-red-500'>
-						<ErrorMessage name='username' />
+						<ErrorMessage name='firstName' />
 					</div>
 					<Field
 						className='border-2 border-orange-500 rounded p-2 mb-4 outline-none'
@@ -108,9 +113,13 @@ const Register = () => {
 						placeholder='Confirm your password'
 					/>
 					<Link to='/login'>
-						<div className='duration-200 text-orange-500 hover:cursor-pointer hover:text-white rounded p-1 hover:bg-orange-500'>Already have an account? Log in</div>
+						<div className='duration-200 text-orange-500 hover:cursor-pointer hover:text-white rounded p-1 hover:bg-orange-500'>
+							Already have an account? Log in
+						</div>
 					</Link>
-					<button className='login-register-button' type='submit'>Submit</button>
+					<button className='login-register-button' type='submit'>
+						Submit
+					</button>
 				</Form>
 			</Formik>
 		</div>

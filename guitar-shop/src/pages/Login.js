@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import axios, * as others from 'axios';
-import { setCredentials } from '../features/userInfo/userInfoSlice';
+import { setCredentials, setShippingAddress } from '../features/userInfo/userInfoSlice';
 
 const Login = () => {
 	const dispatch = useDispatch();
@@ -19,12 +19,25 @@ const Login = () => {
 		password: Yup.string().required('Provide a password'),
 	});
 
-	const onSubmit = async (values, {resetForm}) => {
+	const onSubmit = async (values, { resetForm }) => {
 		try {
-			await axios.post('http://localhost:8000/login', { email: values.email, password: values.password })
-			const { data } = await axios.get(`http://localhost:8000/login/${values.email}`)
-			dispatch(setCredentials({ username: data[0].username, firstName: data[0].firstName, lastName: data[0].lastName, email: data[0].email, isLoggedIn: data[0].isLoggedIn, wishlist: data[0].wishlist }))
-			navigate('/')
+			await axios.post('http://localhost:8000/login', {
+				email: values.email,
+				password: values.password,
+			});
+			const { data } = await axios.get(`http://localhost:8000/login/${values.email}`);
+			dispatch(
+				setCredentials({
+					username: data[0].username,
+					firstName: data[0].firstName,
+					lastName: data[0].lastName,
+					email: data[0].email,
+					isLoggedIn: data[0].isLoggedIn,
+					wishlist: data[0].wishlist,
+				})
+			);
+			dispatch(setShippingAddress(data[0].shippingAddress));
+			navigate('/');
 			resetForm();
 		} catch (error) {
 			console.log(error);
@@ -37,8 +50,7 @@ const Login = () => {
 				initialValues={initialValues}
 				validationSchema={validationSchema}
 				validateOnChange={false}
-				onSubmit={onSubmit}
-			>
+				onSubmit={onSubmit}>
 				<Form className='flex flex-col items-center w-[500px]'>
 					<div className='text-red-500'>
 						<ErrorMessage name='email' />
@@ -61,13 +73,17 @@ const Login = () => {
 						placeholder='Enter your password'
 					/>
 					<Link to='/register'>
-						<div className='duration-200 text-orange-500 hover:cursor-pointer hover:text-white rounded p-1 hover:bg-orange-500'>Don't have an account? Register now.</div>
+						<div className='duration-200 text-orange-500 hover:cursor-pointer hover:text-white rounded p-1 hover:bg-orange-500'>
+							Don't have an account? Register now.
+						</div>
 					</Link>
-					<button className='login-register-button' type='submit'>Log In</button>
+					<button className='login-register-button' type='submit'>
+						Log In
+					</button>
 				</Form>
 			</Formik>
 		</div>
-	)
-}
+	);
+};
 
-export default Login
+export default Login;

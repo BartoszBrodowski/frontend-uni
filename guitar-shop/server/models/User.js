@@ -38,8 +38,8 @@ const userSchema = new mongoose.Schema({
 	wishlist: {
 		type: Array,
 		default: [],
-	}
+	},
 });
 
-const User = mongoose.model('users', userSchema);
+const User = mongoose.model('frontend_users', userSchema);
 module.exports = User;
