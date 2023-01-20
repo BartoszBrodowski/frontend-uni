@@ -4,8 +4,11 @@ import { showDropdown } from '../../features/sortDropdown/dropdownSlice';
 import { changeSearchValue, filterByType } from '../../features/guitarsList/guitarsListSlice';
 import { useState } from 'react';
 import { changeSort } from '../../features/sortSearch/searchSortSlice';
+import { sortByDate } from '../../features/guitarsList/guitarsListSlice';
 
 const Filters = () => {
+	const [selectValue, setSelectValue] = useState('All');
+	const [dateSort, setDateSort] = useState(false);
 	const currentSearchSort = useSelector((state) => state.sortSearch.value);
 	const currentSearchType = useSelector((state) => state.sortSearch.type);
 	const displayDropdown = useSelector((state) => state.dropdown.value);
@@ -23,6 +26,7 @@ const Filters = () => {
 
 	const typeSelectHandler = (e) => {
 		dispatch(filterByType(e.target.value));
+		setSelectValue(e.target.value);
 		dispatch(changeSort('A-Z'));
 	};
 
@@ -31,10 +35,18 @@ const Filters = () => {
 		if (showOnlyAcoustics) {
 			dispatch(filterByType('All'));
 			dispatch(changeSort('A-Z'));
+			setSelectValue('All');
 		} else {
 			dispatch(filterByType('Acoustic'));
 		}
 	};
+
+	const sortByDateHandler = () => {
+		setDateSort(!dateSort);
+		dispatch(sortByDate(dateSort));
+		dispatch(changeSort('A-Z'));
+	};
+
 	return (
 		<div className='flex items-center gap-2 px-4 py-8'>
 			<input
@@ -52,6 +64,7 @@ const Filters = () => {
 				{displayDropdown && <Dropdown />}
 			</form>
 			<select
+				value={selectValue}
 				className='bg-white border border-orange-500 h-10 p-2'
 				onChange={(e) => typeSelectHandler(e)}
 				name='Type'>
@@ -63,6 +76,10 @@ const Filters = () => {
 			<div className='flex gap-2 mr-4'>
 				<h1>Acoustic Only:</h1>
 				<input type='checkbox' onChange={showOnlyAcousticsHandler} />
+			</div>
+			<div className='flex gap-2 mr-4'>
+				<h1>Date: </h1>
+				<input type='checkbox' onChange={sortByDateHandler} />
 			</div>
 		</div>
 	);

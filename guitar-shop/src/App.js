@@ -10,6 +10,7 @@ import ShoppingCart from './pages/ShoppingCart';
 import UserProfile from './pages/UserProfile';
 import AddressEdit from './pages/AddressEdit';
 import { useSelector } from 'react-redux';
+import StringsDetails from './pages/StringsDetails';
 
 function App() {
 	const [showNavbar, setShowNavbar] = useState(false);
@@ -38,6 +39,7 @@ function App() {
 					<Route path='/shopping-cart' element={<ShoppingCart />} />
 					<Route path='/user-profile/:username' element={<UserProfile />} />
 					<Route path='/user-profile/:username/address' element={<AddressEdit />} />
+					<Route path='/strings/:id' element={<StringsDetails />} />
 				</Routes>
 			) : (
 				<Routes>
@@ -48,6 +50,7 @@ function App() {
 					<Route path='/shopping-cart' element={<Login />} />
 					<Route path='/user-profile/:username' element={<Login />} />
 					<Route path='/user-profile/:username/address' element={<Login />} />
+					<Route path='/strings/:id' element={<StringsDetails />} />
 				</Routes>
 			)}
 		</div>

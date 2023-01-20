@@ -3,7 +3,6 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
 	value: 'A-Z',
 	onlyAcoustic: false,
-	sortDate: 'ASC',
 };
 
 export const searchSortSlice = createSlice({

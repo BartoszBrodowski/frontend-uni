@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 import axios, * as others from 'axios';
+import { useSelector } from 'react-redux';
 const reduxLogger = require('redux-logger');
 
 const logger = reduxLogger.createLogger();
@@ -19,7 +20,8 @@ const initialState = {
 			price: 400,
 			image: 'gibson-les-paul.jpg',
 			category: 'Electric',
-			releaseDate: '1952',
+			releaseDate: 1952,
+			stringsId: 'd0f5b0e1-5c5f-4b0f-8f9f-5f9f2f2f2f2f',
 		},
 		{
 			id: uuidv4().toString(),
@@ -30,7 +32,20 @@ const initialState = {
 			price: 300,
 			image: 'fender-stratocaster.jpg',
 			category: 'Electric',
-			releaseDate: '1954',
+			releaseDate: 1954,
+			stringsId: '874ea296-3b6a-47e6-ac66-4b4395b552a8',
+		},
+		{
+			id: uuidv4().toString(),
+			name: 'Epiphone Les Paul',
+			type: 'Les Paul',
+			color: 'Sunburst',
+			description: 'Affordable Epiphone Les Paul model',
+			price: 400,
+			image: 'epiphone-les-paul-sunburst.jpg',
+			category: 'Electric',
+			releaseDate: 1952,
+			stringsId: 'beff0d03-209c-47a4-b2c6-d6b10bc69aae',
 		},
 		{
 			id: uuidv4().toString(),
@@ -41,7 +56,8 @@ const initialState = {
 			price: 200,
 			image: 'fender-squier-bullet-telecaster-lrl-blk.jpg',
 			category: 'Electric',
-			releaseDate: '2010',
+			releaseDate: 2010,
+			stringsId: '2cc14971-d42a-440e-b056-0239878d9d06',
 		},
 		{
 			id: uuidv4().toString(),
@@ -52,18 +68,8 @@ const initialState = {
 			price: 150,
 			image: 'yamahaF310.jpg',
 			category: 'Acoustic',
-			releaseDate: '2010',
-		},
-		{
-			id: uuidv4().toString(),
-			name: 'aaaGibson Les Paul',
-			type: 'Les Paul',
-			color: 'Orange',
-			description: 'Classic Gibson model',
-			price: 400,
-			image: 'gibson-les-paul.jpg',
-			category: 'Electric',
-			releaseDate: '1952',
+			releaseDate: 2010,
+			stringsId: '907c6f0d-94c5-418d-b819-ebd3b3ae788a',
 		},
 	].sort((a, b) => a.name.localeCompare(b.name)),
 };
@@ -112,6 +118,14 @@ export const guitarsListSlice = createSlice({
 		changeSearchValue: (state, action) => {
 			state.searchValue = action.payload;
 		},
+		sortByDate: (state, action) => {
+			if (action.payload === false) {
+				state.value.sort((a, b) => a.releaseDate - b.releaseDate);
+			}
+			if (action.payload === true) {
+				state.value = initialState.value;
+			}
+		},
 	},
 	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 	extraReducers: (builder) => {
@@ -139,6 +153,7 @@ export const {
 	addToList,
 	filterByCategory,
 	changeSearchValue,
+	sortByDate,
 } = guitarsListSlice.actions;
 
 export default guitarsListSlice.reducer;

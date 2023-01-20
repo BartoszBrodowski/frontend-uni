@@ -11,26 +11,17 @@ const GuitarElement = ({ guitar }) => {
 		navigate('/details/' + id.toString());
 	};
 
-	const clickTypeHandler = () => {
-		console.log('test');
-		dispatch(filterByType(guitar.type));
-	};
-
 	return (
 		<div className='flex flex-col items-center'>
 			<div className='flex flex-col items-center'>
 				<img
-					className='hover:cursor-pointer'
+					className='hover:cursor-pointer h-[400px]'
 					onClick={() => showGuitarDetails(guitar.id)}
 					src={require('../../images/' + guitar.image)}
 					alt='Guitar'
 				/>
 				<div className='font-xl'>{guitar.name}</div>
-				<p
-					className='text-slate-500 hover:cursor-pointer hover:text-slate-800 duration-200'
-					onClick={clickTypeHandler}>
-					{guitar.type}
-				</p>
+				<p className='text-slate-500'>{guitar.type}</p>
 				<p className='text-green-500'>${guitar.price}</p>
 			</div>
 			<button
