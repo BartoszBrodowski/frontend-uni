@@ -10,8 +10,6 @@ const GuitarDetails = () => {
 	const { id } = useParams();
 	const guitar = guitarsList.find((guitar) => guitar.id === id);
 	const strings = stringsList.filter((string) => string.id === guitar.stringsId);
-	console.log(stringsList);
-	console.log(strings);
 	const navigateToStrings = () => {
 		navigate('/strings/' + guitar.stringsId);
 	};

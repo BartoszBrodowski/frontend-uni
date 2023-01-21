@@ -29,7 +29,6 @@ const AddressEdit = () => {
 	});
 
 	const onSubmit = async (values, { resetForm }) => {
-		console.log(values);
 		try {
 			await axios.put('http://localhost:8000/changeShippingAddress', {
 				email: email,
