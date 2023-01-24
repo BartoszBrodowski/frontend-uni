@@ -1,6 +1,11 @@
 const moongose = require('mongoose');
 
 const guitarSchema = new moongose.Schema({
+	id: {
+		type: String,
+		required: true,
+		trim: true,
+	},
 	name: {
 		type: String,
 		required: true,
@@ -28,6 +33,20 @@ const guitarSchema = new moongose.Schema({
 	image: {
 		type: String,
 		required: true,
+	},
+	category: {
+		type: String,
+		required: true,
+		trim: true,
+	},
+	releaseDate: {
+		type: Date,
+		required: true,
+	},
+	stringsId: {
+		type: String,
+		required: true,
+		trim: true,
 	},
 });
 

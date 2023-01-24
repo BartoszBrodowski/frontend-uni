@@ -8,10 +8,13 @@ const User = require('./models/User.js');
 const Guitar = require('./models/Guitar.js');
 const bcrypt = require('bcrypt');
 const cors = require('cors');
+const guitarRoutes = require('./routes/guitarRoutes.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({ origin: 'http://localhost:3000' }));
+
+app.use('/guitars', guitarRoutes);
 
 const uri = `mongodb://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@pwasil.pl:27017/bartek`;
 
@@ -169,7 +172,6 @@ app.post('/addGuitar', addGuitar);
 
 app.get('/login/:email', getLogin);
 app.get('/getShippingAddress/:email', getShippingAddress);
-app.get('/guitars', getGuitarList);
 
 app.put('/changeShippingAddress', editShippingAddress);
 
