@@ -23,8 +23,20 @@ export const counterSlice = createSlice({
 		deleteGuitar: (state, action) => {
 			state.value = state.value.filter((guitar) => guitar.id != action.payload);
 		},
+		editGuitar: (state, action) => {
+			state.value
+				.filter((guitar) => guitar.id === action.payload.id)
+				.map((guitar) => {
+					guitar.name = action.payload.name;
+					guitar.color = action.payload.color;
+					guitar.type = action.payload.type;
+				});
+			console.log(state.value);
+		},
 		addNote: (state, action) => {
-			state.value = action.payload;
+			state.value
+				.filter((guitar) => guitar.id === action.payload.id)
+				.map((guitar) => (guitar.note = action.payload.note));
 		},
 	},
 });

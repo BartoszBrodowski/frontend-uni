@@ -11,8 +11,8 @@ const Notes = () => {
 	const guitars = useSelector((state) => state.guitars.value);
 	const guitar = guitars.find((guitar) => guitar.id === id);
 
-	const addNoteHandler = (note) => {
-		dispatch(addNote(note));
+	const addNoteHandler = () => {
+		dispatch(addNote({ id: id, note: note }));
 	};
 
 	const setNoteHandler = (e) => {
@@ -37,7 +37,7 @@ const Notes = () => {
 				<button
 					className='bg-blue-500 rounded-lg p-2'
 					type='button'
-					onClick={() => addNoteHandler(note)}>
+					onClick={() => addNoteHandler()}>
 					Add note
 				</button>
 			</div>

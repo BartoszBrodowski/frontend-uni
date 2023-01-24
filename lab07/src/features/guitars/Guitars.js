@@ -2,11 +2,12 @@ import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { addGuitar, deleteGuitar } from './guitarsSlice';
 import { v4 as uuidv4 } from 'uuid';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Guitars = () => {
 	const guitars = useSelector((state) => state.guitars.value);
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const [name, setName] = useState('');
 	const [type, setType] = useState('');
@@ -45,9 +46,16 @@ const Guitars = () => {
 									onClick={() => deleteGuitarHandler(guitar.id)}>
 									Delete
 								</button>
-								<Link className='bg-slate-300 rounded-lg px-2' to={guitarNotesLink}>
+								<Link
+									className='bg-slate-300 rounded-lg px-2 my-2'
+									to={guitarNotesLink}>
 									Notes
 								</Link>
+								<button
+									className='bg-slate-300 rounded-lg px-2 my-2'
+									onClick={() => navigate(`/guitars/edit/${guitar.id}`)}>
+									Edit
+								</button>
 							</li>
 						);
 					})}
