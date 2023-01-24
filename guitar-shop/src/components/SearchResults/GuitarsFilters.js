@@ -1,17 +1,24 @@
 import Dropdown from '../../features/sortDropdown/Dropdown';
 import { useSelector, useDispatch } from 'react-redux';
 import { showDropdown } from '../../features/sortDropdown/dropdownSlice';
-import { changeSearchValue, filterByType } from '../../features/guitarsList/guitarsListSlice';
+import {
+	changeSearchValue,
+	filterByType,
+	sortAtoZ,
+	sortPriceHighToLow,
+	sortPriceLowToHigh,
+	sortZtoA,
+	sortByDate,
+} from '../../features/guitarsList/guitarsListSlice';
 import { useState } from 'react';
-import { changeSort } from '../../features/searchSortGuitars/searchSortGuitarsSlice';
-import { sortByDate } from '../../features/guitarsList/guitarsListSlice';
+// import { changeSort } from '../../features/searchSortGuitars/searchSortGuitarsSlice';
 
 const GuitarsFilters = () => {
 	const [selectValue, setSelectValue] = useState('All');
 	const [dateSort, setDateSort] = useState(false);
+	const [currentSort, setCurrentSort] = useState('A-Z');
 	const currentSearchSort = useSelector((state) => state.searchSortGuitars.value);
 	const currentSearchType = useSelector((state) => state.searchSortGuitars.type);
-	const displayDropdown = useSelector((state) => state.dropdown.value);
 	const helperSelector = useSelector((state) => state.guitarsList);
 	const [showOnlyAcoustics, setShowOnlyAcoustics] = useState(false);
 	const dispatch = useDispatch();
@@ -27,15 +34,14 @@ const GuitarsFilters = () => {
 	const typeSelectHandler = (e) => {
 		dispatch(filterByType(e.target.value));
 		setSelectValue(e.target.value);
-		dispatch(changeSort('A-Z'));
 	};
 
 	const showOnlyAcousticsHandler = () => {
 		setShowOnlyAcoustics(!showOnlyAcoustics);
 		if (showOnlyAcoustics) {
 			dispatch(filterByType('All'));
-			dispatch(changeSort('A-Z'));
 			setSelectValue('All');
+			setCurrentSort('A-Z');
 		} else {
 			dispatch(filterByType('Acoustic'));
 		}
@@ -44,7 +50,29 @@ const GuitarsFilters = () => {
 	const sortByDateHandler = () => {
 		setDateSort(!dateSort);
 		dispatch(sortByDate(dateSort));
-		dispatch(changeSort('A-Z'));
+	};
+
+	const sortSelectHandler = (e) => {
+		if (e.target.value === 'A-Z') {
+			setCurrentSort('A-Z');
+			dispatch(sortAtoZ());
+		}
+		if (e.target.value === 'Z-A') {
+			setCurrentSort('Z-A');
+			dispatch(sortZtoA());
+		}
+		if (e.target.value === 'Price: Low to High') {
+			setCurrentSort('Price: Low to High');
+			dispatch(sortPriceLowToHigh());
+		}
+		if (e.target.value === 'Price: High to Low') {
+			setCurrentSort('Price: High to Low');
+			dispatch(sortPriceHighToLow());
+		}
+		if (e.target.value === 'Date') {
+			setCurrentSort('Date');
+			dispatch(sortByDate(dateSort));
+		}
 	};
 
 	return (
@@ -55,13 +83,18 @@ const GuitarsFilters = () => {
 				type='text'
 				onChange={(e) => searchHandler(e)}
 			/>
-			<form className='w-60' onClick={dropdownOpenHanlder}>
-				<div className='flex items-center border-orange-500 border h-10 z-10 px-2'>
-					<h1>
-						Sort by: <span className='text-slate-400 ml-2'>{currentSearchSort}</span>
-					</h1>
-				</div>
-				{displayDropdown && <Dropdown />}
+			<form className='w-60'>
+				<select
+					className='w-60 bg-white border border-orange-500 h-10 p-2'
+					name='Sort'
+					value={currentSort}
+					onChange={(e) => sortSelectHandler(e)}>
+					<option value='A-Z'>A-Z</option>
+					<option value='Z-A'>Z-A</option>
+					<option value='Price: Low to High'>Price: Low to High</option>
+					<option value='Price: High to Low'>Price: High to Low</option>
+					<option value='Date'>Date</option>
+				</select>
 			</form>
 			<select
 				value={selectValue}
@@ -76,10 +109,6 @@ const GuitarsFilters = () => {
 			<div className='flex gap-2 mr-4'>
 				<h1>Acoustic Only:</h1>
 				<input type='checkbox' onChange={showOnlyAcousticsHandler} />
-			</div>
-			<div className='flex gap-2 mr-4'>
-				<h1>Date: </h1>
-				<input type='checkbox' onChange={sortByDateHandler} />
 			</div>
 		</div>
 	);

@@ -11,6 +11,7 @@ const initialState = {
 			image: 'GHS_R+RL_Nickel_Rockers.jpg',
 			type: 'Electric',
 			price: 10.99,
+			date: new Date('June 30, 2021'),
 		},
 		{
 			id: '2cc14971-d42a-440e-b056-0239878d9d06',
@@ -20,6 +21,7 @@ const initialState = {
 			image: 'Daddario_NYXL1046_1.jpg',
 			type: 'Electric',
 			price: 12.99,
+			date: new Date('September 11, 2021'),
 		},
 		{
 			id: '874ea296-3b6a-47e6-ac66-4b4395b552a8',
@@ -29,6 +31,7 @@ const initialState = {
 			image: 'Ernie_Ball_2721_Regular_Slinky_Cobalt.png',
 			type: 'Electric',
 			price: 12.99,
+			date: new Date('December 9, 2021'),
 		},
 		{
 			id: 'd0f5b0e1-5c5f-4b0f-8f9f-5f9f2f2f2f2f',
@@ -38,6 +41,7 @@ const initialState = {
 			image: 'Dunlop_DEN1046_Nickel_Plated_Steel.jpg',
 			type: 'Electric',
 			price: 9.99,
+			date: new Date('April 11, 2021'),
 		},
 		{
 			id: '907c6f0d-94c5-418d-b819-ebd3b3ae788a',
@@ -47,6 +51,7 @@ const initialState = {
 			image: "D'Addario_NB1253_Nickel_Bronze.jpg",
 			type: 'Acoustic',
 			price: 12.99,
+			date: new Date('July 20, 2021'),
 		},
 	],
 };
@@ -67,13 +72,20 @@ export const stringsSlice = createSlice({
 		sortPriceHighToLow: (state) => {
 			state.value.sort((a, b) => b.price - a.price);
 		},
+		sortByDate: (state) => {
+			state.value.sort((a, b) => b.date - a.date);
+		},
 		changeSearchValue: (state, action) => {
 			state.searchValue = action.payload;
 		},
-		filterByType: (state, action) => {
-			state.value.filter((strings) => {
-				return strings.type === action.payload;
-			});
+		filterAcoustic: (state, action) => {
+			state.value = initialState.value;
+			if (action.payload === false) {
+				state.value = initialState.value;
+				return;
+			} else {
+				state.value = state.value.filter((strings) => strings.type === 'Acoustic');
+			}
 		},
 	},
 });
@@ -84,7 +96,14 @@ export const regexSearch = (state, regex) => {
 	});
 };
 
-export const { sortAtoZ, sortZtoA, sortPriceLowToHigh, sortPriceHighToLow, changeSearchValue } =
-	stringsSlice.actions;
+export const {
+	sortAtoZ,
+	sortZtoA,
+	sortPriceLowToHigh,
+	sortPriceHighToLow,
+	changeSearchValue,
+	filterAcoustic,
+	sortByDate,
+} = stringsSlice.actions;
 
 export default stringsSlice.reducer;
