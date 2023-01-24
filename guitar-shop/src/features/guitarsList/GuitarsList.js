@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { addToWishlist } from '../userInfo/userInfoSlice';
-import { addToList, regexSearch } from './guitarsListSlice';
+import { regexSearch } from './guitarsListSlice';
 import { useNavigate } from 'react-router-dom';
 import ItemComponent from './ItemComponent';
 

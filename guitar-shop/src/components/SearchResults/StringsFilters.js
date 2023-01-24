@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
 	sortAtoZ,
 	sortZtoA,
@@ -12,7 +12,6 @@ import { filterAcoustic } from '../../features/stringsList/stringsListSlice';
 
 const StringsFilters = () => {
 	const [onlyAcoustic, setOnlyAcoustic] = useState(true);
-	const [sortDate, setSortDate] = useState(true);
 	const dispatch = useDispatch();
 
 	const sortSelectHandler = (e) => {
@@ -36,7 +35,7 @@ const StringsFilters = () => {
 		<div className='flex items-center gap-2 px-4 py-8'>
 			<input
 				className='border-orange-500 border h-10 p-2 outline-none'
-				placeholder='Search'
+				placeholder='Search by name'
 				type='text'
 				onChange={(e) => searchHandler(e)}
 			/>
@@ -48,7 +47,7 @@ const StringsFilters = () => {
 				<option value='Z-A'>Z-A</option>
 				<option value='Price: Low to High'>Price: Low to High</option>
 				<option value='Price: High to Low'>Price: High to Low</option>
-				<option value='Date'>Date</option>
+				<option value='Date'>Date {'(newest)'}</option>
 			</select>
 			<div className='flex gap-2 mr-4'>
 				<h1>Acoustic Only:</h1>

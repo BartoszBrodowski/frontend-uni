@@ -1,6 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import GuitarComponent from '../features/guitarsList/ItemComponent';
 import { removeFromWishlist } from '../features/userInfo/userInfoSlice';
 import Address from '../features/userInfo/Address';
 import axios from 'axios';

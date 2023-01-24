@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import ShoppingCartItem from './ShoppingCartItem';
 import { AiOutlineArrowLeft } from 'react-icons/ai';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const ShoppingCartList = () => {
 	const navigate = useNavigate();

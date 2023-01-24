@@ -1,6 +1,4 @@
-import Dropdown from '../../features/sortDropdown/Dropdown';
-import { useSelector, useDispatch } from 'react-redux';
-import { showDropdown } from '../../features/sortDropdown/dropdownSlice';
+import { useDispatch } from 'react-redux';
 import {
 	changeSearchValue,
 	filterByType,
@@ -11,21 +9,13 @@ import {
 	sortByDate,
 } from '../../features/guitarsList/guitarsListSlice';
 import { useState } from 'react';
-// import { changeSort } from '../../features/searchSortGuitars/searchSortGuitarsSlice';
 
 const GuitarsFilters = () => {
 	const [selectValue, setSelectValue] = useState('All');
 	const [dateSort, setDateSort] = useState(false);
 	const [currentSort, setCurrentSort] = useState('A-Z');
-	const currentSearchSort = useSelector((state) => state.searchSortGuitars.value);
-	const currentSearchType = useSelector((state) => state.searchSortGuitars.type);
-	const helperSelector = useSelector((state) => state.guitarsList);
 	const [showOnlyAcoustics, setShowOnlyAcoustics] = useState(false);
 	const dispatch = useDispatch();
-
-	const dropdownOpenHanlder = () => {
-		dispatch(showDropdown());
-	};
 
 	const searchHandler = (e) => {
 		dispatch(changeSearchValue(e.target.value));
@@ -45,11 +35,6 @@ const GuitarsFilters = () => {
 		} else {
 			dispatch(filterByType('Acoustic'));
 		}
-	};
-
-	const sortByDateHandler = () => {
-		setDateSort(!dateSort);
-		dispatch(sortByDate(dateSort));
 	};
 
 	const sortSelectHandler = (e) => {
@@ -79,7 +64,7 @@ const GuitarsFilters = () => {
 		<div className='flex items-center gap-2 px-4 py-8'>
 			<input
 				className='border-orange-500 border h-10 p-2 outline-none'
-				placeholder='Search'
+				placeholder='Search by name'
 				type='text'
 				onChange={(e) => searchHandler(e)}
 			/>
@@ -93,7 +78,7 @@ const GuitarsFilters = () => {
 					<option value='Z-A'>Z-A</option>
 					<option value='Price: Low to High'>Price: Low to High</option>
 					<option value='Price: High to Low'>Price: High to Low</option>
-					<option value='Date'>Date</option>
+					<option value='Date'>Date {'(newest)'}</option>
 				</select>
 			</form>
 			<select
