@@ -1,7 +1,7 @@
 import { ErrorMessage, Field, Formik, Form } from 'formik';
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 import * as Yup from 'yup';
 import { addToList, editGuitar } from '../features/guitarsList/guitarsListSlice';
@@ -9,6 +9,7 @@ import { addToList, editGuitar } from '../features/guitarsList/guitarsListSlice'
 const EditGuitar = () => {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
+	const { id } = useParams();
 
 	const initialValues = {
 		id: uuidv4(),
@@ -35,11 +36,13 @@ const EditGuitar = () => {
 	const onSubmit = async (values, { resetForm }) => {
 		try {
 			const guitarObject = {
+				id: id,
 				name: values.name,
 				type: values.type,
 				color: values.color,
 				description: values.description,
 				price: parseInt(values.price),
+				// Add image upload
 				image: 'fender-squier-bullet-telecaster-lrl-blk.jpg',
 				category: values.category,
 				// Date jako integer
@@ -59,7 +62,7 @@ const EditGuitar = () => {
 
 	return (
 		<div className='flex flex-col items-center justify-center h-screen gap-2'>
-			<h1>Edit address</h1>
+			<h1 className='font-semibold text-2xl'>Edit guitar element from the list</h1>
 			<Formik
 				initialValues={initialValues}
 				validationSchema={validationSchema}

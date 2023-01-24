@@ -60,7 +60,7 @@ const AddGuitar = () => {
 
 	return (
 		<div className='flex flex-col items-center justify-center h-screen gap-2'>
-			<h1>Edit address</h1>
+			<h1 className='font-bold text-2xl'>Add guitar to list</h1>
 			<Formik
 				initialValues={initialValues}
 				validationSchema={validationSchema}

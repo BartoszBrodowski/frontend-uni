@@ -46,7 +46,9 @@ const GuitarDetails = () => {
 							onClick={() => dispatch(addToCart(guitar))}>
 							Add to cart
 						</button>
-						<button className='orange-button mt-4'>Edit Guitar</button>
+						<button className='orange-button mt-4' onClick={navigateEditGuitarHandler}>
+							Edit Guitar
+						</button>
 					</div>
 				</div>
 			</div>
