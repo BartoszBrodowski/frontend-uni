@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import GuitarElement from '../features/guitarsList/GuitarElement';
+import GuitarComponent from '../features/guitarsList/GuitarComponent';
 import { removeFromWishlist } from '../features/userInfo/userInfoSlice';
 import Address from '../features/userInfo/Address';
 import axios from 'axios';
@@ -15,6 +15,9 @@ const UserProfile = () => {
 	};
 	return (
 		<div className='pt-20 flex justify-center'>
+			<button className='absolute left-4 top-20 font-semibold' onClick={() => navigate(-1)}>
+				{'<<< Go Back'}
+			</button>
 			<div className='flex flex-col items-center w-1/2 shadow-card p-8'>
 				<div className='flex flex-col items-center gap-2 w-full'>
 					<div className='font-bold text-2xl'>{user.username}</div>
@@ -41,7 +44,7 @@ const UserProfile = () => {
 							<li
 								className='flex flex-col gap-2 items-center w-full cols-span-1'
 								key={index}>
-								<GuitarElement guitar={guitar} />
+								<GuitarComponent guitar={guitar} />
 								<button
 									className='orange-button bg-red-500 text-sm'
 									onClick={() => dispatch(removeFromWishlist(index))}>

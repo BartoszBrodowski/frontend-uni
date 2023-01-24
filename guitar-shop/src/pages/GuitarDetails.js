@@ -10,11 +10,18 @@ const GuitarDetails = () => {
 	const { id } = useParams();
 	const guitar = guitarsList.find((guitar) => guitar.id === id);
 	const strings = stringsList.filter((string) => string.id === guitar.stringsId);
-	const navigateToStrings = () => {
+	const navigateToStringsHandler = () => {
 		navigate('/strings/' + guitar.stringsId);
+	};
+
+	const navigateEditGuitarHandler = () => {
+		navigate('/guitars/edit/' + guitar.id);
 	};
 	return (
 		<div className='flex justify-center items-center w-screen h-screen'>
+			<button className='absolute left-4 top-20 font-semibold' onClick={() => navigate(-1)}>
+				{'<<< Go Back'}
+			</button>
 			<div className='flex flex-col items-center w-[1200px]'>
 				<h1 className='font-bold text-4xl mb-8'>{guitar.name}</h1>
 				<div className='grid grid-cols-3 items-center'>
@@ -25,7 +32,7 @@ const GuitarDetails = () => {
 							Strings:
 							<div
 								className='hover:text-gray-800 hover:cursor-pointer duration-200'
-								onClick={navigateToStrings}>
+								onClick={navigateToStringsHandler}>
 								{strings[0].name}
 							</div>
 						</div>
@@ -39,6 +46,7 @@ const GuitarDetails = () => {
 							onClick={() => dispatch(addToCart(guitar))}>
 							Add to cart
 						</button>
+						<button className='orange-button mt-4'>Edit Guitar</button>
 					</div>
 				</div>
 			</div>

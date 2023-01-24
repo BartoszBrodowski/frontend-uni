@@ -11,6 +11,8 @@ import UserProfile from './pages/UserProfile';
 import AddressEdit from './pages/AddressEdit';
 import { useSelector } from 'react-redux';
 import StringsDetails from './pages/StringsDetails';
+import AddGuitar from './pages/AddGuitar';
+import EditGuitar from './pages/EditGuitar';
 
 function App() {
 	const [showNavbar, setShowNavbar] = useState(false);
@@ -35,22 +37,26 @@ function App() {
 					<Route path='/' element={<Home />} />
 					<Route path='/register' element={<Register />} />
 					<Route path='/login' element={<Login />} />
-					<Route path='/details/:id' element={<GuitarDetails />} />
+					<Route path='/guitar/details/:id' element={<GuitarDetails />} />
 					<Route path='/shopping-cart' element={<ShoppingCart />} />
 					<Route path='/user-profile/:username' element={<UserProfile />} />
 					<Route path='/user-profile/:username/address' element={<AddressEdit />} />
 					<Route path='/strings/:id' element={<StringsDetails />} />
+					<Route path='/guitars/add' element={<AddGuitar />} />
+					<Route path='/guitars/edit/:id' element={<EditGuitar />} />
 				</Routes>
 			) : (
 				<Routes>
 					<Route path='/' element={<Home />} />
 					<Route path='/register' element={<Register />} />
 					<Route path='/login' element={<Login />} />
-					<Route path='/details/:id' element={<GuitarDetails />} />
+					<Route path='/guitar/details/:id' element={<GuitarDetails />} />
 					<Route path='/shopping-cart' element={<Login />} />
 					<Route path='/user-profile/:username' element={<Login />} />
 					<Route path='/user-profile/:username/address' element={<Login />} />
 					<Route path='/strings/:id' element={<StringsDetails />} />
+					<Route path='/guitars/add' element={<Login />} />
+					<Route path='/guitars/edit/:id' element={<Login />} />
 				</Routes>
 			)}
 		</div>

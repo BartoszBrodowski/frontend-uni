@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { v4 as uuidv4 } from 'uuid';
 import axios, * as others from 'axios';
-import { useSelector } from 'react-redux';
 const reduxLogger = require('redux-logger');
 
 const logger = reduxLogger.createLogger();
@@ -83,7 +82,11 @@ export const guitarsListSlice = createSlice({
 	initialState,
 	reducers: {
 		addToList: (state, action) => {
-			state.value = state.value.push(action.payload);
+			state.value.push(action.payload);
+		},
+		editGuitar: (state, action) => {
+			const index = state.value.findIndex((guitar) => guitar.id === action.payload.id);
+			state.value[index] = action.payload;
 		},
 		sortAtoZ: (state) => {
 			state.value.sort((a, b) => a.name.localeCompare(b.name));
@@ -127,7 +130,6 @@ export const guitarsListSlice = createSlice({
 			}
 		},
 	},
-	middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
 	extraReducers: (builder) => {
 		builder.addCase(fetchGuitars.pending, (state, action) => {
 			state.loading = true;
@@ -151,6 +153,7 @@ export const {
 	sortPriceHighToLow,
 	filterByType,
 	addToList,
+	editGuitar,
 	filterByCategory,
 	changeSearchValue,
 	sortByDate,

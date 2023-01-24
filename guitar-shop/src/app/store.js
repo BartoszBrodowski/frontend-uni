@@ -1,5 +1,4 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { applyMiddleware, compose } from 'redux';
 import guitarsListReducer from '../features/guitarsList/guitarsListSlice';
 import sortSearchReducer from '../features/sortSearch/searchSortSlice';
 import dropdownReducer from '../features/sortDropdown/dropdownSlice';
