@@ -5,7 +5,7 @@ import {
 	sortPriceHighToLow,
 	sortPriceLowToHigh,
 } from '../guitarsList/guitarsListSlice';
-import { changeSort } from '../sortSearch/searchSortSlice';
+import { changeSort } from '../searchSortGuitars/searchSortGuitarsSlice';
 import { showDropdown } from './dropdownSlice';
 
 const Dropdown = () => {
@@ -36,32 +36,25 @@ const Dropdown = () => {
 	};
 
 	return (
-		<ul
-			className='shadow-dropdown absolute w-60'
-			onClick={() => dispatch(showDropdown())}
-		>
+		<ul className='shadow-dropdown absolute w-60' onClick={() => dispatch(showDropdown())}>
 			<li
 				className='bg-slate-100 p-2 hover:bg-blue-500 hover:cursor-pointer hover:text-white'
-				onClick={sortAtoZHandler}
-			>
+				onClick={sortAtoZHandler}>
 				A-Z
 			</li>
 			<li
 				className='bg-slate-100 p-2 hover:bg-blue-500 hover:cursor-pointer hover:text-white'
-				onClick={sortZtoAHanlder}
-			>
+				onClick={sortZtoAHanlder}>
 				Z-A
 			</li>
 			<li
 				className='bg-slate-100 p-2 hover:bg-blue-500 hover:cursor-pointer hover:text-white'
-				onClick={sortPriceLowToHighHandler}
-			>
+				onClick={sortPriceLowToHighHandler}>
 				Price: Low to High
 			</li>
 			<li
 				className='bg-slate-100 p-2 hover:bg-blue-500 hover:cursor-pointer hover:text-white'
-				onClick={sortPriceHighToLowHandler}
-			>
+				onClick={sortPriceHighToLowHandler}>
 				Price: High to Low
 			</li>
 		</ul>

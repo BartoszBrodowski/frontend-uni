@@ -17,6 +17,12 @@ const GuitarDetails = () => {
 	const navigateEditGuitarHandler = () => {
 		navigate('/guitars/edit/' + guitar.id);
 	};
+
+	const addToCartHandler = () => {
+		dispatch(addToCart(guitar));
+		navigate('/shopping-cart');
+	};
+
 	return (
 		<div className='flex justify-center items-center w-screen h-screen'>
 			<button className='absolute left-4 top-20 font-semibold' onClick={() => navigate(-1)}>
@@ -43,7 +49,7 @@ const GuitarDetails = () => {
 						</div>
 						<button
 							className='text-white bg-green-500 font-bold text-4xl p-2 rounded hover:bg-green-700 duration-200'
-							onClick={() => dispatch(addToCart(guitar))}>
+							onClick={addToCartHandler}>
 							Add to cart
 						</button>
 						<button className='orange-button mt-4' onClick={navigateEditGuitarHandler}>

@@ -3,14 +3,14 @@ import { useSelector, useDispatch } from 'react-redux';
 import { showDropdown } from '../../features/sortDropdown/dropdownSlice';
 import { changeSearchValue, filterByType } from '../../features/guitarsList/guitarsListSlice';
 import { useState } from 'react';
-import { changeSort } from '../../features/sortSearch/searchSortSlice';
+import { changeSort } from '../../features/searchSortGuitars/searchSortGuitarsSlice';
 import { sortByDate } from '../../features/guitarsList/guitarsListSlice';
 
-const Filters = () => {
+const GuitarsFilters = () => {
 	const [selectValue, setSelectValue] = useState('All');
 	const [dateSort, setDateSort] = useState(false);
-	const currentSearchSort = useSelector((state) => state.sortSearch.value);
-	const currentSearchType = useSelector((state) => state.sortSearch.type);
+	const currentSearchSort = useSelector((state) => state.searchSortGuitars.value);
+	const currentSearchType = useSelector((state) => state.searchSortGuitars.type);
 	const displayDropdown = useSelector((state) => state.dropdown.value);
 	const helperSelector = useSelector((state) => state.guitarsList);
 	const [showOnlyAcoustics, setShowOnlyAcoustics] = useState(false);
@@ -85,4 +85,4 @@ const Filters = () => {
 	);
 };
 
-export default Filters;
+export default GuitarsFilters;

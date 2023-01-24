@@ -1,10 +1,10 @@
 import GuitarsList from '../../features/guitarsList/GuitarsList';
-import Filters from './Filters';
+import GuitarsFilters from './GuitarsFilters';
 
 const SearchResults = () => {
 	return (
-		<div className='flex flex-col items-center w-[80%] shadow-card rounded-md mt-20'>
-			<Filters />
+		<div className='flex flex-col items-center w-[70%] shadow-card rounded-md mt-28'>
+			<GuitarsFilters />
 			<GuitarsList />
 		</div>
 	);

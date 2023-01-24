@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from 'react-redux';
-import GuitarComponent from './GuitarComponent';
 import { addToWishlist } from '../userInfo/userInfoSlice';
 import { addToList, regexSearch } from './guitarsListSlice';
 import { useNavigate } from 'react-router-dom';
+import ItemComponent from './ItemComponent';
 
 const GuitarsList = () => {
 	const dispatch = useDispatch();
@@ -15,7 +15,7 @@ const GuitarsList = () => {
 	};
 
 	return (
-		<div className='border-t-2 border-orange-500 pt-4 flex flex-col items-center'>
+		<div className='border-t-2 border-orange-500 pt-4 flex flex-col items-center w-full'>
 			<button className='orange-button w-[10%]' onClick={() => addGuitarButtonHandler()}>
 				Add Guitar
 			</button>
@@ -23,7 +23,7 @@ const GuitarsList = () => {
 				{guitarsListSearchFiltered.map((guitar, index) => {
 					return (
 						<li className='flex flex-col items-center gap-2' key={index}>
-							<GuitarComponent guitar={guitar} />
+							<ItemComponent item={guitar} />
 							<button
 								className='green-button'
 								type='button'

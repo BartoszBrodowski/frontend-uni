@@ -13,6 +13,7 @@ import { useSelector } from 'react-redux';
 import StringsDetails from './pages/StringsDetails';
 import AddGuitar from './pages/AddGuitar';
 import EditGuitar from './pages/EditGuitar';
+import Strings from './pages/Strings';
 
 function App() {
 	const [showNavbar, setShowNavbar] = useState(false);
@@ -30,7 +31,7 @@ function App() {
 		}
 	}, [location]);
 	return (
-		<div>
+		<div className='App'>
 			{showNavbar && <Navbar />}
 			{loggedIn ? (
 				<Routes>
@@ -44,6 +45,7 @@ function App() {
 					<Route path='/strings/:id' element={<StringsDetails />} />
 					<Route path='/guitars/add' element={<AddGuitar />} />
 					<Route path='/guitars/edit/:id' element={<EditGuitar />} />
+					<Route path='/strings' element={<Strings />} />
 				</Routes>
 			) : (
 				<Routes>
@@ -57,6 +59,7 @@ function App() {
 					<Route path='/strings/:id' element={<StringsDetails />} />
 					<Route path='/guitars/add' element={<Login />} />
 					<Route path='/guitars/edit/:id' element={<Login />} />
+					<Route path='/strings' element={<Strings />} />
 				</Routes>
 			)}
 		</div>

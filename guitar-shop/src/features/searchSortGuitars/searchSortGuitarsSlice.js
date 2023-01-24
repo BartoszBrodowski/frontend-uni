@@ -5,8 +5,8 @@ const initialState = {
 	onlyAcoustic: false,
 };
 
-export const searchSortSlice = createSlice({
-	name: 'sortSearch',
+export const searchSortGuitarsSlice = createSlice({
+	name: 'sortSearchGuitars',
 	initialState,
 	reducers: {
 		changeSort: (state, action) => {
@@ -17,6 +17,6 @@ export const searchSortSlice = createSlice({
 		},
 	},
 });
-export const { changeSort, changeCategory } = searchSortSlice.actions;
+export const { changeSort, changeCategory } = searchSortGuitarsSlice.actions;
 
-export default searchSortSlice.reducer;
+export default searchSortGuitarsSlice.reducer;

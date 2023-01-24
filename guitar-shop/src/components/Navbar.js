@@ -15,9 +15,17 @@ const Navbar = () => {
 		await axios.post('http://localhost:8000/logout', { email: user.email });
 	};
 	return (
-		<nav className='flex items-center justify-between bg-orange-500 h-12 w-full p-4 py-8 absolute'>
+		<nav className='flex items-center justify-between bg-orange-500 h-12 w-full p-[15%] py-8 absolute'>
 			<div className='text-white text-3xl w-1/5 font-bold hover:cursor-pointer'>
 				<Link to='/'>Guitar shop</Link>
+			</div>
+			<div className='flex gap-4 text-white font-semibold text-2xl'>
+				<div className='hover:cursor-pointer' onClick={() => navigate('/')}>
+					Guitars
+				</div>
+				<div className='hover:cursor-pointer' onClick={() => navigate('/strings')}>
+					Strings
+				</div>
 			</div>
 			<div className='flex flex-row-reverse gap-4 w-1/5'>
 				<Link to={loggedIn ? '/shopping-cart' : '/login'}>
