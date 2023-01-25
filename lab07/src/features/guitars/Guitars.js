@@ -5,13 +5,12 @@ import { v4 as uuidv4 } from 'uuid';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Guitars = () => {
-	const guitars = useSelector((state) => state.guitars.value);
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
-
 	const [name, setName] = useState('');
 	const [type, setType] = useState('');
 	const [color, setColor] = useState('');
+	const guitars = useSelector((state) => state.guitars.value);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
 	const setNameHandler = (e) => {
 		setName(e.target.value);
