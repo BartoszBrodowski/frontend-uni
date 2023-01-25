@@ -11,6 +11,7 @@ import {
 import { useState } from 'react';
 
 const GuitarsFilters = () => {
+	const [checked, setChecked] = useState(false);
 	const [selectValue, setSelectValue] = useState('All');
 	const [dateSort, setDateSort] = useState(false);
 	const [currentSort, setCurrentSort] = useState('A-Z');
@@ -24,10 +25,17 @@ const GuitarsFilters = () => {
 	const typeSelectHandler = (e) => {
 		dispatch(filterByType(e.target.value));
 		setSelectValue(e.target.value);
+		setCurrentSort('A-Z');
+		if (showOnlyAcoustics) {
+			setChecked(!checked);
+			setShowOnlyAcoustics(!showOnlyAcoustics);
+		}
 	};
 
 	const showOnlyAcousticsHandler = () => {
 		setShowOnlyAcoustics(!showOnlyAcoustics);
+		setChecked(!checked);
+		setSelectValue('All');
 		if (showOnlyAcoustics) {
 			dispatch(filterByType('All'));
 			setSelectValue('All');
@@ -93,7 +101,7 @@ const GuitarsFilters = () => {
 			</select>
 			<div className='flex gap-2 mr-4'>
 				<h1>Acoustic Only:</h1>
-				<input type='checkbox' onChange={showOnlyAcousticsHandler} />
+				<input type='checkbox' checked={checked} onChange={showOnlyAcousticsHandler} />
 			</div>
 		</div>
 	);

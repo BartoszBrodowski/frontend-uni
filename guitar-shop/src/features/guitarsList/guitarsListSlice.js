@@ -98,6 +98,7 @@ export const guitarsListSlice = createSlice({
 			state.value.sort((a, b) => b.price - a.price);
 		},
 		filterByType: (state, action) => {
+			state.value = initialState.value;
 			if (action.payload === 'All') {
 				state.value = initialState.value;
 				return;
