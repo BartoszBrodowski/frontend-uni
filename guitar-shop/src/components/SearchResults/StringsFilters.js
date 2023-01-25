@@ -12,14 +12,30 @@ import { filterAcoustic } from '../../features/stringsList/stringsListSlice';
 
 const StringsFilters = () => {
 	const [onlyAcoustic, setOnlyAcoustic] = useState(true);
+	const [currentSort, setCurrentSort] = useState('A-Z');
 	const dispatch = useDispatch();
 
 	const sortSelectHandler = (e) => {
-		if (e.target.value === 'A-Z') dispatch(sortAtoZ());
-		if (e.target.value === 'Z-A') dispatch(sortZtoA());
-		if (e.target.value === 'Price: Low to High') dispatch(sortPriceLowToHigh());
-		if (e.target.value === 'Price: High to Low') dispatch(sortPriceHighToLow());
-		if (e.target.value === 'Date') dispatch(sortByDate());
+		if (e.target.value === 'A-Z') {
+			dispatch(sortAtoZ());
+			setCurrentSort('A-Z');
+		}
+		if (e.target.value === 'Z-A') {
+			dispatch(sortZtoA());
+			setCurrentSort('Z-A');
+		}
+		if (e.target.value === 'Price: Low to High') {
+			dispatch(sortPriceLowToHigh());
+			setCurrentSort('Price: Low to High');
+		}
+		if (e.target.value === 'Price: High to Low') {
+			dispatch(sortPriceHighToLow());
+			setCurrentSort('Price: High to Low');
+		}
+		if (e.target.value === 'Date') {
+			dispatch(sortByDate());
+			setCurrentSort('Date');
+		}
 	};
 
 	const searchHandler = (e) => {
@@ -29,6 +45,7 @@ const StringsFilters = () => {
 	const showOnlyAcousticsHandler = () => {
 		setOnlyAcoustic(!onlyAcoustic);
 		dispatch(filterAcoustic(onlyAcoustic));
+		setCurrentSort('A-Z');
 	};
 
 	return (
@@ -42,6 +59,7 @@ const StringsFilters = () => {
 			<select
 				className='w-60 bg-white border border-orange-500 h-10 p-2'
 				name='Sort'
+				value={currentSort}
 				onChange={(e) => sortSelectHandler(e)}>
 				<option value='A-Z'>A-Z</option>
 				<option value='Z-A'>Z-A</option>
