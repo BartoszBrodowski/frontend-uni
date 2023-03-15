@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
 	changeSearchValue,
 	filterByType,
@@ -16,6 +16,7 @@ const GuitarsFilters = () => {
 	const [dateSort, setDateSort] = useState(false);
 	const [currentSort, setCurrentSort] = useState('A-Z');
 	const [showOnlyAcoustics, setShowOnlyAcoustics] = useState(false);
+	const searchValue = useSelector((state) => state.guitarsList.searchValue);
 	const dispatch = useDispatch();
 
 	const searchHandler = (e) => {
@@ -75,6 +76,7 @@ const GuitarsFilters = () => {
 				placeholder='Search by name'
 				type='text'
 				onChange={(e) => searchHandler(e)}
+				value={searchValue}
 			/>
 			<form className='w-60'>
 				<select

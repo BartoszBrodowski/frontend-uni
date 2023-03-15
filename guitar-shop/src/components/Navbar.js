@@ -28,7 +28,7 @@ const Navbar = () => {
 				</div>
 			</div>
 			<div className='flex flex-row-reverse gap-4 w-1/5'>
-				<Link to={loggedIn ? '/shopping-cart' : '/login'}>
+				<Link to={loggedIn ? '/shopping-cart' : '/shopping-cart'}>
 					<AiOutlineShoppingCart className='text-white text-3xl hover:cursor-pointer' />
 				</Link>
 				{user.username ? (

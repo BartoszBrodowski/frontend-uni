@@ -67,6 +67,18 @@ const initialState = {
 			releaseDate: new Date('June 30, 2010'),
 			stringsId: '907c6f0d-94c5-418d-b819-ebd3b3ae788a',
 		},
+		{
+			id: uuidv4().toString(),
+			name: 'Takamine GD30',
+			type: 'Acoustic',
+			color: 'Natural',
+			description: 'Affordable Takamine model',
+			price: 200,
+			image: 'TakamineGD30.jpg',
+			category: 'Acoustic',
+			releaseDate: new Date('January 1, 2010'),
+			stringsId: '907c6f0d-94c5-418d-b819-ebd3b3ae788a',
+		},
 	].sort((a, b) => a.name.localeCompare(b.name)),
 };
 
