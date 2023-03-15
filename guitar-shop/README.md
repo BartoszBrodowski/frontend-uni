@@ -29,11 +29,11 @@ The most important things I've learned in the making of this project are:
 
 ## Final effect :heavy_check_mark:
 
-<img src="./src/images/README/GuitarShop1.jpg" width="1400px" height="900px">
-<img src="./src/images/README/GuitarShop2.jpg" width="1400px" height="900px">
-<br>
-<img src="./src/images/README/GuitarShopLogin.jpg" width="500px" height="650px">
-<img src="./src/images/README/GuitarShopRegister.jpg" width="500px" height="650px">
-<img src="./src/images/README/GuitarShopShoppingCart.jpg" width="1000px" height="900px">
-<img src="./src/images/README/GuitarShopGuitar.jpg" width="1400px" height="500px">
-<img src="./src/images/README/GuitarShopStrings.jpg" width="1400px" height="500px">
+<img src="./src/images/README/GuitarShop1.jpg" width="1000px" height="500px">
+<img src="./src/images/README/GuitarShop2.jpg" width="1000px" height="650px">
+<img src="./src/images/README/GuitarShopLogin.jpg" width="1000px" height="500px">
+<img src="./src/images/README/GuitarShopRegister.jpg" width="100px" height="500px">
+<img src="./src/images/README/GuitarShopShoppingCart.jpg" width="1000px" height="650px">
+<img src="./src/images/README/GuitarShopShoppingCartEmpty.jpg" width="1000px" height="300px">
+<img src="./src/images/README/GuitarShopGuitar.jpg" width="1000px" height="400px">
+<img src="./src/images/README/GuitarShopStrings.jpg" width="1000px" height="500px">
